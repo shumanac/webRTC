@@ -1,6 +1,33 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+
+var express = require('express'),
+    bodyParser = require('body-parser');
+var app = express();
+
+app.use('/static', express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
+
+app.set('views', './app/views');
+app.set('view engine', 'ejs');
+
+app.get('/', function (req, res) {
+    res.render('index');
+});
+
+app.listen(9966, function () {
+    console.log('Example app listening on port 9966!');
+});
+
+
 var getUserMedia = require('getusermedia')
+
+
 
 getUserMedia({
     video: true,
